@@ -42,7 +42,7 @@ print("=" * 60)
 print(df.info())
 
 print("\n" + "=" * 60)
-print("ESTATÍSTICAS DESCRITIVAS")
+print("ESTATÍSTICAS DESCRITIVAS ")
 print("=" * 60)
 print(df.describe())
 
@@ -58,17 +58,17 @@ print(df.isnull().sum())
 print("\n" + "=" * 60)
 print("TOTAL DE LINHAS DUPLICADAS")
 print("=" * 60)
-print(df.duplicated().sum())
+print(df.duplicated().sum())#identificar quantas linhas estão duplicadas no dataframe
 
-# Removendo duplicatas
+# removendo duplicatas
 df = df.drop_duplicates()
 
 # Convertendo datas
-df['Order Date'] = pd.to_datetime(df['Order Date'], dayfirst=False)
+df['Order Date'] = pd.to_datetime(df['Order Date'], dayfirst=False) #dayfirst=False para interpretar o formato MM/DD/YYYY
 df['Ship Date'] = pd.to_datetime(df['Ship Date'], dayfirst=False)
 
 #crriando coluna de ano
-df['Ano Pedido'] = df['Order Date'].dt.year
+df['Ano Pedido'] = df['Order Date'].dt.year #dt.year para extrair o ano da data de pedido
 df['Ano Envio'] = df['Ship Date'].dt.year
 
 
@@ -91,7 +91,7 @@ print("QUANTIDADE DE TICKETS POR CLIENTE")
 print("=" * 60)
 
 tickets_por_cliente = df.groupby('Customer Name')['Order ID'].nunique()
-print(tickets_por_cliente.sort_values(ascending=False).head(10))
+print(tickets_por_cliente.sort_values(ascending=False).head(10)) #ascending=False para mostrar os clientes com mais pedidos no topo
 
 ####################################################
 
@@ -110,8 +110,8 @@ print("=" * 60)
 
 vendas_ano = df.groupby('Ano Pedido')['Sales'].sum()
 
-ano_maior_venda = vendas_ano.idxmax()
-valor_maior_venda = vendas_ano.max()
+ano_maior_venda = vendas_ano.idxmax() #retorna o índice (neste caso, o ano) do valor máximo encontrado na série vendas_ano
+valor_maior_venda = vendas_ano.max()#retorna o valor máximo encontrado na série vendas_ano, ou seja, o total de vendas do ano com maior volume de vendas
 
 print(f"Ano com maior volume de vendas: {ano_maior_venda}")
 print(f"Total vendido: ${valor_maior_venda:.2f}")
@@ -140,7 +140,7 @@ print("=" * 60)
 ship_mode = df['Ship Mode'].value_counts()
 print(ship_mode)
 
-print(f"\nMais utilizado: {ship_mode.idxmax()}")
+print(f"\nMais utilizado: {ship_mode.idxmax()}")#idxmax() para retornar o tipo de ship mode mais utilizado (o índice do valor máximo encontrado na série shipmode)
 
 ####################################################
 
@@ -152,15 +152,14 @@ clientes_regiao = df.groupby('Region')['Customer ID'].nunique()
 
 print(clientes_regiao)
 
-print(f"\nRegião com mais clientes: {clientes_regiao.idxmax()}")
-
+print(f"\nRegião com mais clientes: {clientes_regiao.idxmax()}")#idxmax() para retornar a região com maior quantidade de clientes (o índice do valor máximo encontrado na série clientes_regiao)
 ####################################################
 
 print("\n" + "=" * 60)
 print("PORCENTAGEM DE CADA CATEGORIA VENDIDA")
 print("=" * 60)
 
-categoria_pct = df['Category'].value_counts(normalize=True) * 100
+categoria_pct = df['Category'].value_counts(normalize=True) * 100 #value_counts(normalize=True) para calcular a porcentagem de cada categoria em relação ao total de vendas, multiplicando por 100 para obter o valor em porcentagem
 
 print(categoria_pct)
 
@@ -170,7 +169,7 @@ print("\n" + "=" * 60)
 print("PORCENTAGEM DE CADA SUB-CATEGORIA VENDIDA")
 print("=" * 60)
 
-subcategoria_pct = df['Sub-Category'].value_counts(normalize=True) * 100
+subcategoria_pct = df['Sub-Category'].value_counts(normalize=True) * 100 #value_counts(normalize=True) para calcular a porcentagem de cada sub-categoria em relação ao total de vendas, multiplicando por 100 para obter o valor em porcentagem
 
 print(subcategoria_pct)
 
@@ -202,7 +201,7 @@ print("=" * 60)
 
 itens_subcategoria = df.groupby('Sub-Category')['Quantity'].sum()
 
-print(itens_subcategoria.sort_values(ascending=False))
+print(itens_subcategoria.sort_values(ascending=False)) #sort_values(ascending=False) para ordenar as sub-categorias pela quantidade de itens vendidos, do maior para o menor
 
 
 ####################################################
@@ -288,7 +287,7 @@ plt.title("Tipos de Ship Mode")
 plt.xlabel("Ship Mode")
 plt.ylabel("Quantidade")
 
-plt.tight_layout()
+plt.tight_layout() #ajusta o layout para evitar sobreposição de elementos no gráfico
 plt.savefig("grafico_shipmode.png")
 
 plt.show()
@@ -298,7 +297,7 @@ plt.close()
 # CATEGORIAS
 plt.figure(figsize=(8, 5))
 
-categoria_pct.plot(kind='pie', autopct='%1.1f%%')
+categoria_pct.plot(kind='pie', autopct='%1.1f%%') #kind='pie' para criar um gráfico de pizza, autopct='%1.1f%%' para mostrar a porcentagem de cada categoria no gráfico
 
 plt.title("Porcentagem de Categorias Vendidas")
 plt.ylabel("")
@@ -313,7 +312,7 @@ plt.close()
 # SUBCATEGORIAS
 plt.figure(figsize=(12, 6))
 
-itens_subcategoria.sort_values(ascending=False).plot(kind='bar')
+itens_subcategoria.sort_values(ascending=False).plot(kind='bar') #sort_values(ascending=False) para ordenar as subcategorias pela quantidade de itens vendidos, do maior para o menor, e kind='bar' para criar um gráfico de barras
 
 plt.title("Itens Vendidos por Subcategoria")
 plt.xlabel("Subcategoria")
