@@ -3,8 +3,11 @@ Seja bem-vindo(a)!
 
 Este projeto corresponde ao desafio extra do curso Introdução ao Data Science (SCTEC). O objetivo principal foi realizar uma Análise Exploratória de Dados (AED) utilizando a base pública do Titanic, disponível em formato CSV. Abaixo estarão descritos passo a passo da formação do arquivo, para a documentação de tudo o que foi feito e melhor compreensão do usuário.
 
-🔗 Dataset utilizado:
+Dataset utilizado:
 https://drive.google.com/file/d/11HptTxJbUMRG16xpC39fcliba_-Z_J9d/
+
+Link do projeto no GitHub:
+https://github.com/LorenaDaumann/DesafioSCTEC 
 
 
 OBJETIVO DA ANÁLISE
