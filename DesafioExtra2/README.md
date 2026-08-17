@@ -3,8 +3,11 @@ Seja bem-vindo(a)!
 
 Este projeto corresponde ao desafio extra do curso Introdução ao Data Science (SCTEC). O objetivo principal foi realizar uma Análise Exploratória de Dados (AED) utilizando a base pública do Titanic, disponível em formato CSV. Abaixo estarão descritos passo a passo da formação do arquivo, para a documentação de tudo o que foi feito e melhor compreensão do usuário.
 
-🔗 Dataset utilizado:
-https://www.kaggle.com/datasets/vivek468/superstore-dataset-final?resource=download 
+Dataset utilizado:
+https://drive.google.com/file/d/11HptTxJbUMRG16xpC39fcliba_-Z_J9d/
+
+Link do projeto no GitHub:
+https://github.com/LorenaDaumann/DesafioSCTEC 
 
 
 OBJETIVO DA ANÁLISE
@@ -19,9 +22,7 @@ matplotlib.pyplot: visualização gráfica
 
 
 #2. Carregamento dos dados
-O dataset foi carregado com:
-
-df = pd.read_csv("titanic_dataset.csv")
+O dataset foi carregado.
 
 #3. Exploração inicial dos dados
 
@@ -38,60 +39,64 @@ df.isnull().sum()
 para identificar valores ausentes no dataset.
 
 
-
-
-
-
 #4. Tratamento e organização dos dados
-Nesta etapa, foi realizada a verificação de valores nulos e a preparação das variáveis para análise.
-
-Foi criada uma nova coluna chamada AgeGroup com o seguinte código:
-
-df['AgeGroup'] = pd.cut(df['Age'], bins=[0,12,18,35,60,100])
-
-Essa linha utiliza a função pd.cut() para transformar a variável contínua idade em faixas etárias, facilitando a análise. Os intervalos definidos representam grupos como crianças, adolescentes, adultos e idosos.
-
-Também foi criada a coluna:
-
-df['HasCabin'] = df['Cabin'].notnull()
-
-Essa variável indica se o passageiro possuía cabine ou não, permitindo análises relacionadas à condição socioeconômica.
-
+Nesta etapa foram realizadas:
+-verificação de valores nulos;
+-remoção de duplicatas;
+-conversão de datas;
+-criação de colunas auxiliares;
+-preparação das variáveis para análise.
 
 #5. Análise Exploratória de Dados (AED)
-Foram realizadas diversas análises com o uso de groupby, incluindo:
-*Quantidade de sobreviventes e não sobreviventes
-*Sobrevivência por classe (Pclass)
-*Sobrevivência por sexo (Sex)
-*Taxa média de sobrevivência por faixa etária (AgeGroup)
-*Relação entre possuir cabine e sobrevivência
+Foram realizadas diversas análises utilizando funções como groupby(), sum(), mean(), count() e value_counts(). As principais análises realizadas foram:
+- padrões de vendas;
+- desempenho financeiro;
+- comportamento dos clientes;
+- impacto dos descontos na lucratividade;
+- distribuição de produtos vendidos;
+- eficiência logística e de entregas.
 
 Foram utilizados dois tipos principais de análise:
 
 .size() → para contagem de indivíduos
 .mean() → para cálculo de taxa de sobrevivência
 
+Foram tambem geradas visualizações gráficas utilizando matplotlib, permitindo uma melhor interpretação dos dados e identificação de padrões.
 
-#6. Insights obtidos
-A partir das análises, foi possível observar padrões importantes, como:
+A partir desse processo, foram gerados insights relevantes para auxiliar na interpretação do desempenho comercial da empresa.
 
-*Diferença na taxa de sobrevivência entre gêneros
-*Influência da classe social na sobrevivência
-*Impacto da idade nas chances de sobrevivência
-*Possível relação entre possuir cabine e maior chance de sobreviver
 
-Foram tambem geradas visualizações gráficas utilizando matplotlib, permitindo uma melhor interpretação dos dados e identificação de padrões de sobrevivência.
+#"Ins0ights obtidos
+
+A partir das análises, foi possível identificar padrões importantes, como:
+
+determinados anos apresentaram crescimento significativo nas vendas;
+algumas categorias concentram grande parte do faturamento da empresa;
+certos segmentos de clientes realizam mais pedidos que outros;
+determinadas subcategorias possuem alta quantidade de vendas, mas baixa lucratividade;
+descontos excessivos podem reduzir significativamente o lucro líquido;
+alguns métodos de entrega são muito mais utilizados que outros;
+certas regiões possuem maior concentração de clientes e pedidos.
 
 CONCLUSÃO
-A análise exploratória permitiu identificar padrões relevantes nos dados do Titanic, demonstrando como fatores sociais e demográficos influenciaram as chances de sobrevivência. 
+A análise exploratória permitiu identificar padrões relevantes nos dados de vendas,.
 Este projeto reforça a importância da organizacao, limpeza e exploração dos dados como etapas fundamentais no processo de Data Science.
 
 
 ESTRUTURA DO PROJETO
 O projeto inclui:
 
-Código-fonte em Python
-Base de dados utilizada
-Documentação (este arquivo README)
-Resultados e análises realizadas
--->
+código-fonte em Python;
+base de dados utilizada;
+documentação (README);
+gráficos gerados;
+análises e insights;
+integração com GitHub.
+
+
+PARA ATUALIZAÇÃO DO CÓDIGO (COMMIT)
+git add .
+git commit -m "mensagem"
+git push
+
+  -->
