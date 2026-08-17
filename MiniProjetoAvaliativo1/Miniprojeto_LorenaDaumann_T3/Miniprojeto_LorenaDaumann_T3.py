@@ -1,5 +1,4 @@
 """
-==============================================================================
 MINI-PROJETO AVALIATIVO - MÓDULO 1 - SEMANA 07
 Visualização de Dados e Business Intelligence [T3]
 
@@ -21,20 +20,13 @@ Colunas (conforme documentação da base):
   PR_ID       - código do produto (SKU)
   PR_CAT      - categoria do produto
   PR_NOME     - nome do produto
-
-Como executar:
-- VSCode: instale as extensões "Jupyter" e "Python", coloque o arquivo
-  BaseVarejo.csv na mesma pasta deste script e rode:
-      python Miniprojeto_LorenaDaumann_T3.py
-- Google Colab: faça upload deste script (ou copie o conteúdo para células),
-  faça upload da BaseVarejo.csv e execute todas as células.
-==============================================================================
 """
 
 # =============================================================================
 # 0. IMPORTAÇÃO DAS BIBLIOTECAS
 # =============================================================================
 import pandas as pd
+from pathlib import Path
 
 pd.set_option("display.max_columns", None)
 pd.set_option("display.width", 120)
@@ -52,9 +44,26 @@ def titulo(texto):
 # =============================================================================
 titulo("ETAPA 1 - CARREGAMENTO DA BASE VAREJO")
 
-CAMINHO_ARQUIVO = "BaseVarejo.csv"  # a base usa ";" como separador de colunas
+# Localiza o arquivo BaseVarejo.csv relativo ao local do script
+SCRIPT_DIR = Path(__file__).resolve().parent
+CAMINHO_ARQUIVO = SCRIPT_DIR / "BaseVarejo.csv"
 
-df = pd.read_csv(CAMINHO_ARQUIVO, sep=";", encoding="utf-8")
+if not CAMINHO_ARQUIVO.exists():
+    # tenta procurar no diretório pai e em subpastas como fallback
+    fallback = SCRIPT_DIR.parent / "BaseVarejo.csv"
+    if fallback.exists():
+        CAMINHO_ARQUIVO = fallback
+    else:
+        matches = list(SCRIPT_DIR.rglob("BaseVarejo.csv"))
+        if matches:
+            CAMINHO_ARQUIVO = matches[0]
+
+try:
+    print(f"Carregando arquivo: {CAMINHO_ARQUIVO}")
+    df = pd.read_csv(str(CAMINHO_ARQUIVO), sep=";", encoding="utf-8")
+except FileNotFoundError:
+    raise FileNotFoundError(
+        f"Arquivo 'BaseVarejo.csv' não encontrado. Procure nos caminhos: {SCRIPT_DIR}, {SCRIPT_DIR.parent} ou subpastas.")
 
 # O arquivo original tem ";;;;" sobrando no fim do cabeçalho, o que gera 4
 # colunas fantasma ("Unnamed: 10" a "Unnamed: 13"), 100% vazias. Isso já é o
