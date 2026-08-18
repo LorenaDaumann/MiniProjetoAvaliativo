@@ -4,6 +4,8 @@
 **Aluna:** Lorena Daumann
 **Turma:** T3
 
+**Arquivo do projeto:** [Miniprojeto_LorenaDaumann_T3.md](../Miniprojeto_LorenaDaumann_T3.md)
+
 ## Objetivo
 
 Realizar uma Análise Exploratória de Dados (AED) sobre a base **Varejo**, um
