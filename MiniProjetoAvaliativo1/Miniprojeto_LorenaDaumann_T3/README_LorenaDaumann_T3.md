@@ -18,7 +18,6 @@ Cada linha da base `BaseVarejo.csv` representa **um item comprado dentro de
 uma compra** (não uma compra inteira). As colunas são:
 
 | Coluna | Descrição |
-|---|---|
 | `DATA` | Data da compra |
 | `CO_ID` | Identificação da compra (nota fiscal) |
 | `CL_ID` | Identificação do cliente |
@@ -132,9 +131,3 @@ Miniprojeto_LorenaDaumann_T3/
 ├── BaseVarejo.csv                    # base de dados original (adicionar manualmente)
 └── df_limpo.csv                      # gerado automaticamente ao rodar o script
 ```
-
-> Observação: `BaseVarejo.csv` (~49 MB) e `df_limpo.csv` (~42 MB) são
-> arquivos grandes para um repositório Git. Se preferir um repositório mais
-> leve, é possível adicionar `BaseVarejo.csv` ao `.gitignore` e deixar só o
-> link de download no README — os critérios de avaliação (Sprint 6) só
-> exigem script + README + `df_limpo`.
