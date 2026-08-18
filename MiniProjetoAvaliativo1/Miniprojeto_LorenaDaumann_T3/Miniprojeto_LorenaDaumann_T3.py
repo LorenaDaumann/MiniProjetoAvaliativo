@@ -22,9 +22,7 @@ Colunas (conforme documentação da base):
   PR_NOME     - nome do produto
 """
 
-# =============================================================================
 # 0. IMPORTAÇÃO DAS BIBLIOTECAS
-# =============================================================================
 import pandas as pd
 from pathlib import Path
 
@@ -39,9 +37,7 @@ def titulo(texto):
     print("=" * 70)
 
 
-# =============================================================================
 # 1. CARREGAMENTO DA BASE
-# =============================================================================
 titulo("ETAPA 1 - CARREGAMENTO DA BASE VAREJO")
 
 # Localiza o arquivo BaseVarejo.csv relativo ao local do script
@@ -86,9 +82,7 @@ titulo("INFORMAÇÕES GERAIS DO DATAFRAME")
 print(df.info())
 
 
-# =============================================================================
 # 2. DIAGNÓSTICO DE PROBLEMAS NA BASE
-# =============================================================================
 titulo("ETAPA 2 - VALORES NULOS POR COLUNA")
 print(df.isnull().sum())
 # As colunas de negócio (DATA, CO_ID, CL_ID, CL_GENERO, CL_EC, CL_FHL,
@@ -119,9 +113,7 @@ co_id_por_cliente = df.groupby("CO_ID")["CL_ID"].nunique()
 print(f"Compras associadas a mais de um cliente (inconsistência): {(co_id_por_cliente > 1).sum()}")
 
 
-# =============================================================================
 # 3. LIMPEZA DOS DADOS
-# =============================================================================
 titulo("ETAPA 3 - LIMPEZA: REMOÇÃO DAS COLUNAS FANTASMA (100% nulas)")
 # Optamos por REMOVER essas colunas (em vez de imputar) porque não carregam
 # nenhuma informação: são apenas um artefato do arquivo CSV original.
@@ -169,9 +161,7 @@ print(f"Registros (linhas): {df.shape[0]}")
 print(f"Colunas: {df.shape[1]}")
 
 
-# =============================================================================
 # 4. ESTATÍSTICAS DESCRITIVAS - NÚMERO DE FILHOS DO CLIENTE
-# =============================================================================
 titulo("ETAPA 4 - ESTATÍSTICAS DESCRITIVAS: NÚMERO DE FILHOS DO CLIENTE")
 
 # IMPORTANTE: CL_FHL é um atributo do CLIENTE, repetido em toda linha das
@@ -198,9 +188,7 @@ print(f"Mínimo.............: {min_filhos}")
 print(f"Contagem (clientes): {contagem_filhos}")
 
 
-# =============================================================================
 # 5. PADRÕES DE AGRUPAMENTO (>= 2 AGRUPAMENTOS)
-# =============================================================================
 titulo("ETAPA 5 - AGRUPAMENTO 1: COMPRAS E ITENS POR GÊNERO")
 
 compras_por_genero = df.groupby("CL_GENERO")["CO_ID"].nunique().sort_values(ascending=False)
@@ -233,17 +221,13 @@ tabela_dinamica = pd.pivot_table(
 print(tabela_dinamica)
 
 
-# =============================================================================
 # 6. EXPORTAÇÃO DA BASE LIMPA
-# =============================================================================
 titulo("ETAPA 6 - EXPORTANDO BASE LIMPA (df_limpo.csv)")
 df.to_csv("df_limpo.csv", index=False, encoding="utf-8")
 print("Arquivo 'df_limpo.csv' gerado com sucesso na pasta do projeto.")
 
 
-# =============================================================================
 # 7. CONCLUSÕES
-# =============================================================================
 titulo("CONCLUSÕES E PRINCIPAIS INSIGHTS")
 
 conclusoes = [
